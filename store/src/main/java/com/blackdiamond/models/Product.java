@@ -1,8 +1,9 @@
 package com.blackdiamond.models;
 
 import com.blackdiamond.interfaces.IDiscount;
+import com.blackdiamond.interfaces.ISalesMagnament;
 
-public class Product implements IDiscount {
+public abstract class Product implements IDiscount {
     protected String ID;
     protected String description;
     protected int stock;
@@ -11,6 +12,12 @@ public class Product implements IDiscount {
     protected boolean hasStock;
     protected double discountPer;
     protected boolean isForSale = true;
+
+    public Product(String des, double unitPrice, boolean hasStock) {
+        this.description = des;
+        this.unitPrice = unitPrice;
+        this.hasStock = hasStock;
+    }
 
     public String getID() {
         return ID;
@@ -31,16 +38,22 @@ public class Product implements IDiscount {
     public double getUnitPrice() {
         return unitPrice;
     }
-    public boolean getHasStock(){
+
+    public boolean getHasStock() {
         return hasStock;
     }
 
-    public boolean getIsForsale(){
+    public boolean getIsForsale() {
         return isForSale;
     }
 
+
     public void setID(String ID) {
 
+    }
+
+    public void setIsForSale(boolean b) {
+        this.isForSale = b;
     }
 
     public boolean checkID(String id) {
@@ -51,14 +64,13 @@ public class Product implements IDiscount {
         return false;
     }
 
-    public void addProduct(int quantity){
+    public void addProduct(int quantity) {
         stock += quantity;
     }
 
-    public void removeProduct(int quantity){
+    public void removeProduct(int quantity) {
         stock -= quantity;
     }
-    
 
     @Override
     public String toString() {
@@ -71,14 +83,12 @@ public class Product implements IDiscount {
         this.discountPer = discount;
     }
 
-    
     public double getDiscountPer() {
-      return discountPer;
+        return discountPer;
     }
 
-    
     public double getDiscountPrice() {
-       double discount = stockPrice * (discountPer/100);
-       return stockPrice - discount;
+        double discount = stockPrice * (discountPer / 100);
+        return stockPrice - discount;
     }
 }

@@ -11,14 +11,10 @@ public class Drink extends Product implements IEatable {
     private Date expiredDate;
     private int kcal;
 
-    public Drink(String id, String des, int stock, double stockPrice, double unitPrice, boolean hasStock,
+    public Drink(String id, String des, double stockPrice, double unitPrice, boolean hasStock,
             boolean isAlcoholic, boolean isImported, double alcoholicPer) {
+        super(des, unitPrice, hasStock);
         setID(id);
-        this.description = des;
-        this.stock = stock;
-        this.stockPrice = stockPrice;
-        this.unitPrice = unitPrice;
-        this.hasStock = hasStock;
         this.isAlcoholic = isAlcoholic;
         this.isImported = isImported;
         this.alcoholicPer = alcoholicPer;
