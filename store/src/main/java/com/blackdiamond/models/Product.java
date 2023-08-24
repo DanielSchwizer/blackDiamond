@@ -7,16 +7,15 @@ public abstract class Product implements IDiscount {
     protected String ID;
     protected String description;
     protected int stock;
-    protected double stockPrice;
-    protected double unitPrice;
+    protected float stockPrice;
+    protected float unitPrice;
     protected boolean hasStock;
-    protected double discountPer;
+    protected float discountPer;
     protected boolean isForSale = true;
 
-    public Product(String des, double unitPrice, boolean hasStock) {
+    public Product(String des, float unitPrice) {
         this.description = des;
         this.unitPrice = unitPrice;
-        this.hasStock = hasStock;
     }
 
     public String getID() {
@@ -31,11 +30,11 @@ public abstract class Product implements IDiscount {
         return stock;
     }
 
-    public double getStockPrice() {
+    public float getStockPrice() {
         return stockPrice;
     }
 
-    public double getUnitPrice() {
+    public float getUnitPrice() {
         return unitPrice;
     }
 
@@ -56,12 +55,15 @@ public abstract class Product implements IDiscount {
         this.isForSale = b;
     }
 
-    public boolean checkID(String id) {
-        if (id.length() == 5) {
-            return true;
+    public void setHasStock (boolean hasStock){
+        this.hasStock = hasStock;
+    }
+
+    public void checkID(String id) {
+        if (!(id.length() == 5)) {
+            throw new IllegalArgumentException("identicador de producto invalido");
         }
-        System.out.println("codigo de producto invalido");
-        return false;
+       
     }
 
     public void addProduct(int quantity) {
@@ -80,15 +82,23 @@ public abstract class Product implements IDiscount {
     }
 
     public void setDiscountPer(float discount) {
-        this.discountPer = discount;
+        
     }
 
-    public double getDiscountPer() {
+    public float getDiscountPer() {
         return discountPer;
     }
 
-    public double getDiscountPrice() {
-        double discount = stockPrice * (discountPer / 100);
+    public float getDiscountPrice() {
+        float discount = stockPrice * (discountPer / 100);
         return stockPrice - discount;
+    }
+
+    public boolean validDiscount(float discountPer){
+        if(getDiscountPrice() < getUnitPrice()){
+            return false;
+        }
+        return true;
+
     }
 }

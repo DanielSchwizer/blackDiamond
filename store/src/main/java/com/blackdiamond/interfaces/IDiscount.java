@@ -5,8 +5,10 @@ package com.blackdiamond.interfaces;
 public interface IDiscount {
     public void setDiscountPer(float discount);
 
-    public double getDiscountPer();
+    public float getDiscountPer();
 
-    public double getDiscountPrice();
+    public float getDiscountPrice();
+
+    public boolean validDiscount(float discountPer);
 
 }

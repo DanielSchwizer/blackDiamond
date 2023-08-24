@@ -19,6 +19,18 @@ public class Store {
         this.balance = balance;
     }
 
+    public void setMaxStock(int maxStock) {
+        this.maxStock = maxStock;
+    }
+
+    public int getMaxStock() {
+        return maxStock;
+    }
+
+    public float getBalance() {
+        return balance;
+    }
+
     public void buyProducts(Product product, int quantity) {
         if (list.size() + quantity > maxStock) {
             System.out.println("No se pueden agregar más productos, el stock llego a su limite.");
@@ -35,6 +47,7 @@ public class Store {
         }
         balance -= quantity * product.getUnitPrice();
         product.addProduct(quantity);
+        product.setHasStock(true);
         list.put(product.getID(), product);
         System.out.println(product.getDescription() + " fue comprado y agregado al stock");
     }
@@ -42,27 +55,20 @@ public class Store {
     public void sellProducts() {
         for (Map.Entry<String, Product> p : shoppingCart.getShoppingList().entrySet()) {
             list.replace(p.getKey(), p.getValue());
+            balance += shoppingCart.getGains();
             System.out.println(list.toString());
         }
 
-        System.out.println(list.toString());
+        System.out.println("TOTAL VENTA = " + shoppingCart.getGains());
 
     }
 
     public void addToCart(Product product, int quantity) {
-        if(!list.containsKey(product.getID())){
+        if (!list.containsKey(product.getID())) {
             System.out.println("el producto no existe en el inventario");
             return;
         }
         shoppingCart.addProductToCart(product, quantity);
-    }
-
-    public void setMaxStock(int maxStock) {
-        this.maxStock = maxStock;
-    }
-
-    public int getMaxStock() {
-        return maxStock;
     }
 
 }

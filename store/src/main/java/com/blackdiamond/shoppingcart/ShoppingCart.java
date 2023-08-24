@@ -6,6 +6,7 @@ import com.blackdiamond.models.Product;
 
 public class ShoppingCart {
     HashMap<String, Product> shoppingList = new HashMap<String, Product>();
+    float gains;
 
     public void addProductToCart(Product product, int quantity) {
         if (!product.getHasStock()) {
@@ -26,9 +27,11 @@ public class ShoppingCart {
         if (product.getStock() < quantity) {
             product.removeProduct(product.getStock());
             product.setIsForSale(false);
+            product.setHasStock(false);
+            this.gains += quantity * product.getStockPrice();
             shoppingList.put(product.getID(), product);
             System.out.println("hay productos con stock disponible menor al solicitado");
-            System.out.println(product.getID() + " " + product.getDescription() + " x " + product.getStockPrice());
+            System.out.println(product.getID() + " " + product.getDescription()+ " " + quantity + " x " + product.getStockPrice());
             return;
         }
         if (quantity > 10) {
@@ -36,11 +39,17 @@ public class ShoppingCart {
             return;
         }
         product.removeProduct(quantity);
+        this.gains += quantity * product.getStockPrice();
         shoppingList.put(product.getID(), product);
-        System.out.println(product.getID() + " " + product.getDescription() + " x " + product.getStockPrice());
+        System.out.println(product.getID() + " " + product.getDescription()+ " " + quantity  + " x " + product.getStockPrice());
     }
 
     public HashMap<String, Product> getShoppingList() {
         return shoppingList;
     }
+
+     public float getGains() {
+        return gains;
+    }
+
 }

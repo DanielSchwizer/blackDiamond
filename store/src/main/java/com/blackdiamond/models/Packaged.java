@@ -11,15 +11,15 @@ public class Packaged extends Product implements IEatable, ISalesMagnament {
     private boolean isImported;
     private Date expiredDate;
     private int kcal;
-    private double gainPer;
+    private float gainPer;
 
-    public Packaged(String id, String des, double unitPrice, boolean hasStock,
-            PackagingType pType, boolean isImported, double gainPer) {
-        super(des, unitPrice, hasStock);
+    public Packaged(String id, String des, float unitPrice, 
+            PackagingType pType, boolean isImported, float gainPer, float discountPer) {
+        super(des, unitPrice);
         setID(id);
         this.pType = pType;
         this.isImported = isImported;
-        setStockPrice(gainPer);
+        setStockPrice(gainPer, discountPer);
     }
 
     public PackagingType getpType() {
@@ -30,14 +30,13 @@ public class Packaged extends Product implements IEatable, ISalesMagnament {
         return isImported;
     }
 
-    public double getGainPer() {
+    public float getGainPer() {
         return gainPer;
     }
 
     @Override
     public void setID(String id) {
-        if (!checkID(id))
-            return;
+        checkID(id);
         if (id.charAt(0) != 'A') {
             System.out.println("producto mal clasificado");
             return;
@@ -68,18 +67,27 @@ public class Packaged extends Product implements IEatable, ISalesMagnament {
     }
 
     @Override
-    public void setStockPrice(double gainPer) {
+    public void setStockPrice(float gainPer, float discountPer) {
         checkGainPer(gainPer);
+        setDiscountPer(discountPer);
         this.gainPer = gainPer;
         this.stockPrice = getUnitPrice() * (1 + getGainPer() / 100);
 
     }
 
     @Override
-    public void checkGainPer(double gainPer) {
+    public void checkGainPer(float gainPer) {
         if (gainPer > 20) {
             throw new IllegalArgumentException("El porcentaje de ganancia para comestibles no puede superar el 20%.");
         }
+    }
+
+    public void setDiscountPer(float discount){
+        if(discount > 20 && !validDiscount(discount)){
+            System.out.println("el descuento no pudo ser aplicado");
+            return;
+        }
+        this.discountPer = discount;
     }
 
 }
