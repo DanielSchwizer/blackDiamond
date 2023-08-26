@@ -3,8 +3,7 @@ package com.blackdiamond.testproducts.drinktest;
 import org.junit.Test;
 
 import com.blackdiamond.models.Drink;
-import com.blackdiamond.models.Packaged;
-import com.blackdiamond.types.PackagingType;
+
 
 public class DrinkTest {
     @Test(expected = Exception.class)

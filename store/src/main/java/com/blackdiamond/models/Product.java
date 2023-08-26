@@ -54,7 +54,6 @@ public abstract class Product implements IDiscount {
 
     public void addTaxes() {
         if (this.getisImported()) {
-            System.out.println(("impuestos"));
             float taxes = stockPrice * (1 + 10 / 100);
             float taxesPrice = stockPrice + taxes;
             this.stockPrice = taxesPrice;

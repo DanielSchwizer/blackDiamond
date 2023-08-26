@@ -1,5 +1,6 @@
 package com.blackdiamond;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -67,12 +68,19 @@ public class Store {
     }
 
 
-     public void listProductsWithLowerUtilities(float porcentajeUtilidad) {
+     public  List<String> listProductsWithLowerUtilities(float gainPer) {
+        List<String> resultList = new ArrayList<>();
+        
         list.values().stream()
-            .filter(product -> product.getGainPer() < porcentajeUtilidad)
-            .forEach(product -> System.out.println("Código: " + product.getID() +
-                                                   " | Descripción: " + product.getDescription() +
-                                                   " | Cantidad en stock: " + product.getStock()));
+            .filter(product -> product.getGainPer() < gainPer)
+            .forEach(product -> {
+                String productInfo = "Código: " + product.getID() +
+                                     "  Descripcion: " + product.getDescription() +
+                                     "  Cantidad en stock: " + product.getStock();
+                System.out.println(productInfo);
+                resultList.add(productInfo);
+            });
+            return resultList;
     }
     private boolean isOverstocked(int quantity) {
         if (list.size() + quantity > maxStock) {

@@ -1,9 +1,6 @@
 package com.blackdiamond.models;
 
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
-import java.util.stream.Collectors;
 
 import com.blackdiamond.interfaces.IEatable;
 import com.blackdiamond.interfaces.ISalesMagnament;
@@ -14,7 +11,7 @@ public class Packaged extends Product implements IEatable, ISalesMagnament {
     private boolean isImported;
     private String expiredDate;
     private int kcal;
-    private float finalPrice;
+
     public Packaged(String id, String des, float unitPrice,
             PackagingType pType, boolean isImported, int kcal, String expiredDate) {
         super(des, unitPrice);
@@ -66,23 +63,18 @@ public class Packaged extends Product implements IEatable, ISalesMagnament {
         if (gainPer > 20) {
             throw new IllegalArgumentException("El porcentaje de ganancia para comestibles no puede superar el 20%.");
         }
-       
+
         this.stockPrice = (getUnitPrice() * (1 + gainPer / 100));
         addTaxes();
     }
 
-    public void setFinalStockPrice(float discount) {
-        setDiscount(discount);
-        this.stockPrice -= (stockPrice * discountPer / 100);
-    }
-
-     public void addTaxes(){
-        if(isImported){
+    public void addTaxes() {
+        if (isImported) {
             stockPrice += stockPrice * 0.1;
             System.out.println("al producto se le aplicara un impuesto del 10% por ser importado");
             System.out.println("precio con impuestos :" + stockPrice);
         }
-     }
+    }
 
     public boolean checkDiscountPer(float discount) {
         if (discount > 20) {
@@ -104,11 +96,9 @@ public class Packaged extends Product implements IEatable, ISalesMagnament {
         this.stockPrice = getDiscountPrice(discount);
     }
 
-    
-
     @Override
     public float getDiscount() {
-       return getDiscountPrice(this.discountPer);
+        return getDiscountPrice(this.discountPer);
     }
 
     @Override

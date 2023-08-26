@@ -3,7 +3,9 @@ package com.blackdiamond;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
+
+
+import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -23,6 +25,9 @@ public class StoreTest {
     private Packaged productoEnvasado;
     private Drink productoBebida;
     private CleaningProduct productoLimpieza;
+    private Packaged comestible1;
+    private Packaged comestible2;
+    private Packaged comestible3;
 
     /**
      * Rigorous Test :-)
@@ -30,12 +35,19 @@ public class StoreTest {
     @Before
     public void setUp() {
         // Inicializar la tienda y los productos para cada prueba
-        store = new Store(100, 1000); // Ejemplo de valores, ajusta según tu implementación
-
+        store = new Store(100, 1000);
         productoEnvasado = new Packaged("AB123", "producto envasado", 20, PackagingType.LATA, true, 500,"2024-04-08");
         productoBebida = new Drink("AC345", 20, "producto bebida", false, false, 0, 600, "2024-08-09");
         productoLimpieza = new CleaningProduct("AZ431", "producto limpieza", 20, CleaningType.MULTIUSO);
+        
+        comestible1 = new Packaged("AB321", "comestible1", 20,PackagingType.VIDRIO, false, 500, "2023-10-15");
+        comestible2 = new Packaged("AB123", "comestible2", 40,PackagingType.VIDRIO, false, 500, "2023-10-15");
+        comestible3 = new Packaged("AB521", "comestible3", 60,PackagingType.VIDRIO, false, 500, "2023-10-15");
+        
+     
+       
     }
+
 
     @Test
     public void testBuyProduct() {
@@ -133,6 +145,42 @@ public class StoreTest {
         assertEquals(0, productoEnvasado.getStock());
         assertFalse(productoEnvasado.getHasStock());
         assertFalse(productoEnvasado.getIsForsale());
+    }
+
+    @Test
+     public void testproductsObtainEatablesWithLessDiscount() {
+        store.buyProducts(comestible1, 1);
+        store.buyProducts(comestible2, 1);
+        store.buyProducts(comestible3, 1);
+
+        comestible1.setStockPrice(20.0f);
+        comestible2.setStockPrice(20.0f);
+        comestible3.setStockPrice(14.0f);
+
+        comestible1.setDiscount(10.0f);
+        comestible2.setDiscount(7.0f);
+        comestible3.setDiscount(9.0f);
+
+        List<String> result = store.obtainEatablesWithLessDiscount(10.0f);
+        assertEquals(2, result.size());
+        assertEquals("COMESTIBLE2", result.get(0));
+        assertEquals("COMESTIBLE3", result.get(1));
+    }
+
+    @Test
+    public void testlistProductsWithLowerUtilities() {
+        store.buyProducts(comestible1, 1);
+        store.buyProducts(comestible2, 1);
+        store.buyProducts(comestible3, 1);
+
+        
+        comestible1.setStockPrice(20.0f);
+        comestible2.setStockPrice(11.0f);
+        comestible3.setStockPrice(9.0f);
+
+        List<String> result = store.listProductsWithLowerUtilities(10.0f);
+        assertEquals(1, result.size());
+        assertEquals("Código: AB521  Descripcion: comestible3  Cantidad en stock: 1", result.get(0));
     }
 }
 
