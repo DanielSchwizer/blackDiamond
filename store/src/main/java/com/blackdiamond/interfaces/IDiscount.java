@@ -3,12 +3,9 @@ package com.blackdiamond.interfaces;
 
 
 public interface IDiscount {
-    public void setDiscountPer(float discount);
+    public void setDiscount(float discount);
+    public float getDiscountPercent();
+    public float getDiscount();
 
-    public float getDiscountPer();
-
-    public float getDiscountPrice();
-
-    public boolean validDiscount(float discountPer);
 
 }

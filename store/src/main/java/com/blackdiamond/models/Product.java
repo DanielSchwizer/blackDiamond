@@ -1,7 +1,6 @@
 package com.blackdiamond.models;
 
 import com.blackdiamond.interfaces.IDiscount;
-import com.blackdiamond.interfaces.ISalesMagnament;
 
 public abstract class Product implements IDiscount {
     protected String ID;
@@ -12,10 +11,62 @@ public abstract class Product implements IDiscount {
     protected boolean hasStock;
     protected float discountPer;
     protected boolean isForSale = true;
+    protected boolean isImported;
 
     public Product(String des, float unitPrice) {
         this.description = des;
         this.unitPrice = unitPrice;
+    }
+
+    public void checkID(String id) {
+        if (!(id.length() == 5)) {
+            throw new IllegalArgumentException("identicador de producto invalido");
+        }
+        if (!id.matches("^[A-Z]{2}\\d{3}")) {
+            throw new IllegalArgumentException("identicador de producto invalido");
+        }
+    }
+
+    public void addProduct(int quantity) {
+        stock += quantity;
+    }
+
+    public void removeProduct(int quantity) {
+        stock -= quantity;
+        if (stock <= 0) {
+            hasStock = false;
+        }
+    }
+
+    public boolean validDiscount(float discount) {
+        if (getDiscountPrice(discount) < unitPrice) {
+            return false;
+        }
+        return true;
+
+    }
+
+    public float getDiscountPrice(float discount) {
+        float finalprice = stockPrice * (discount / 100);
+        finalprice = stockPrice - finalprice;
+        return finalprice;
+    }
+
+    public void addTaxes() {
+        if (this.getisImported()) {
+            System.out.println(("impuestos"));
+            float taxes = stockPrice * (1 + 10 / 100);
+            float taxesPrice = stockPrice + taxes;
+            this.stockPrice = taxesPrice;
+
+        }
+    }
+
+    @Override
+    public String toString() {
+        return String.format(
+                "ID: %s descripcion: %s stock: %d precio de venta: %f precio de compra: %f queda stock?: %b", ID,
+                description, stock, stockPrice, unitPrice, hasStock);
     }
 
     public String getID() {
@@ -42,63 +93,33 @@ public abstract class Product implements IDiscount {
         return hasStock;
     }
 
-    public boolean getIsForsale() {
-        return isForSale;
+    public boolean getisImported() {
+        return isImported;
     }
 
-
-    public void setID(String ID) {
-
+    public boolean getIsForsale() {
+        return isForSale;
     }
 
     public void setIsForSale(boolean b) {
         this.isForSale = b;
     }
 
-    public void setHasStock (boolean hasStock){
+    public void setHasStock(boolean hasStock) {
         this.hasStock = hasStock;
     }
 
-    public void checkID(String id) {
-        if (!(id.length() == 5)) {
-            throw new IllegalArgumentException("identicador de producto invalido");
-        }
-       
+    public void setDiscount(float discount) {
+        this.discountPer = discount;
     }
 
-    public void addProduct(int quantity) {
-        stock += quantity;
+    public void setIsImported(boolean isImported) {
+        this.isImported = isImported;
     }
 
-    public void removeProduct(int quantity) {
-        stock -= quantity;
+    public float getGainPer() {
+        float gainPer = (stockPrice / unitPrice - 1) * 100;
+        return gainPer;
     }
 
-    @Override
-    public String toString() {
-        return String.format(
-                "ID: %s descripcion: %s stock: %d precio de venta: %f precio de compra: %f ¿queda stock?: %b", ID,
-                description, stock, stockPrice, unitPrice, hasStock);
-    }
-
-    public void setDiscountPer(float discount) {
-        
-    }
-
-    public float getDiscountPer() {
-        return discountPer;
-    }
-
-    public float getDiscountPrice() {
-        float discount = stockPrice * (discountPer / 100);
-        return stockPrice - discount;
-    }
-
-    public boolean validDiscount(float discountPer){
-        if(getDiscountPrice() < getUnitPrice()){
-            return false;
-        }
-        return true;
-
-    }
 }

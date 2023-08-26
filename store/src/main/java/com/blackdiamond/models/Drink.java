@@ -9,45 +9,70 @@ public class Drink extends Product implements IEatable, ISalesMagnament {
     private boolean isAlcoholic;
     private boolean isImported;
     private float alcoholicPer;
-    private Date expiredDate;
+    private String expiredDate;
     private int kcal;
-    private float gainPer;
 
-    public Drink(String id, String des, float unitPrice,
-            boolean isAlcoholic, boolean isImported, float alcoholicPer, float gainPer, float discountPer) {
+    public Drink(String id, float unitPrice, String des,
+            boolean isAlcoholic, boolean isImported, float alcoholicPer,  int kcal,
+            String expiredDate) {
         super(des, unitPrice);
         setID(id);
         this.isAlcoholic = isAlcoholic;
         this.isImported = isImported;
         this.alcoholicPer = alcoholicPer;
-        setStockPrice(gainPer, discountPer);
+        setKcal(kcal);
+        setExpiredDate(expiredDate);
     }
 
-    public float getGainPer() {
-        return gainPer;
+    public void setStockPrice(float gainPer) {
+        if (gainPer > 20) {
+            throw new IllegalArgumentException("El porcentaje de ganancia para comestibles no puede superar el 20%.");
+        }
+        this.stockPrice = (getUnitPrice() * (1 + gainPer / 100));
+        addTaxes();
     }
 
-    @Override
+    public boolean checkDiscountPer(float discount) {
+        if (discount > 15) {
+            System.out.println("el descuento no pudo ser aplicado");
+            return false;
+        }
+        if (!validDiscount(discount)) {
+            System.out.println("el descuento no pudo ser aplicado porque es menor al precio de compra");
+            return false;
+        }
+        return true;
+    }
+
+    public void setDiscount(float discount) {
+        if (!checkDiscountPer(discount)) {
+            return;
+        }
+        this.discountPer = discount;
+        this.stockPrice = getDiscountPrice(discount);
+    }
+    public void addTaxes(){
+        if(isImported){
+            stockPrice += stockPrice * 0.1;
+            System.out.println("al producto se le aplicara un impuesto del 10% por ser importado");
+            System.out.println("precio con impuestos :" + stockPrice);
+        }
+     }
+
     public void setID(String id) {
         checkID(id);
-        if (id.charAt(0) != 'A') {
+        if (!id.startsWith("AC")) {
             System.out.println("producto mal clasificado");
-            return;
+            throw new IllegalArgumentException("identicador de producto invalido");
         }
-        if (id.charAt(1) != 'C') {
-            System.out.println("producto mal clasificado");
-            return;
-        }
-
         this.ID = id;
     }
 
-    @Override
-    public void setExpiredDate(Date date) {
+    public void setExpiredDate(String date) {
         this.expiredDate = date;
     }
 
-    public Date getExpiredDate() {
+    public String getExpiredDate() {
         return expiredDate;
     }
 
@@ -60,25 +85,13 @@ public class Drink extends Product implements IEatable, ISalesMagnament {
     }
 
     @Override
-    public void setStockPrice(float gainPer, float discountPer) {
-        checkGainPer(gainPer);
-        setDiscountPer(discountPer);
-        this.gainPer = gainPer;
-        this.stockPrice = getUnitPrice() * (1 + getGainPer() / 100) - getDiscountPer();
-    }
+    public float getDiscount() {
+        return getDiscountPrice(this.discountPer);
+     }
 
     @Override
-    public void checkGainPer(float gainPer) {
-        if (gainPer > 20) {
-            throw new IllegalArgumentException("El porcentaje de ganancia para comestibles no puede superar el 20%.");
-        }
+    public float getDiscountPercent() {
+        return this.discountPer;
     }
 
-    public void setDiscountPer(float discount){
-        if(discount > 15 && !validDiscount(discount)){
-            System.out.println("el descuento no pudo ser aplicado");
-            return;
-        }
-        this.discountPer = discount;
-    }
 }

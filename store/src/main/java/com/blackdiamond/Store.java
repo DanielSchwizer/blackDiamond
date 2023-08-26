@@ -1,14 +1,16 @@
 package com.blackdiamond;
 
-import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
+import com.blackdiamond.models.Packaged;
 import com.blackdiamond.models.Product;
 import com.blackdiamond.shoppingcart.ShoppingCart;
 
 public class Store {
-    String name = "BlackDiamondStore";
+    final static String name = "BlackDiamondStore";
     int maxStock;
     float balance;
     HashMap<String, Product> list = new HashMap<String, Product>();
@@ -19,30 +21,14 @@ public class Store {
         this.balance = balance;
     }
 
-    public void setMaxStock(int maxStock) {
-        this.maxStock = maxStock;
-    }
-
-    public int getMaxStock() {
-        return maxStock;
-    }
-
-    public float getBalance() {
-        return balance;
-    }
-
     public void buyProducts(Product product, int quantity) {
-        if (list.size() + quantity > maxStock) {
-            System.out.println("No se pueden agregar más productos, el stock llego a su limite.");
+        if (!isOverstocked(quantity)) {
             return;
         }
-
-        if (product.getUnitPrice() * quantity > balance) {
-            System.out.println("no hay dinero suficiente para ejecutar la transaccion");
+        if (!isSufficientBalance(product, quantity)) {
             return;
         }
-        if (product.getStock() + quantity >= maxStock) {
-            System.out.println("limite de stock alcanzado por: " + product.getDescription());
+        if (!isStockReached(product, quantity)) {
             return;
         }
         balance -= quantity * product.getUnitPrice();
@@ -56,7 +42,6 @@ public class Store {
         for (Map.Entry<String, Product> p : shoppingCart.getShoppingList().entrySet()) {
             list.replace(p.getKey(), p.getValue());
             balance += shoppingCart.getGains();
-            System.out.println(list.toString());
         }
 
         System.out.println("TOTAL VENTA = " + shoppingCart.getGains());
@@ -71,4 +56,60 @@ public class Store {
         shoppingCart.addProductToCart(product, quantity);
     }
 
+     public List<String> obtainEatablesWithLessDiscount (float discountPer) {
+        return list.values().stream()
+            .filter(product -> product instanceof Packaged && !product.getisImported())
+            .map(product -> (Packaged) product)
+            .filter(Packaged -> Packaged.getDiscountPercent() < discountPer)
+            .sorted((comestible1, comestible2) -> Float.compare(comestible1.getStockPrice(), comestible2.getStockPrice()))
+            .map(comestible -> comestible.getDescription().toUpperCase())
+            .collect(Collectors.toList());
+    }
+
+
+     public void listProductsWithLowerUtilities(float porcentajeUtilidad) {
+        list.values().stream()
+            .filter(product -> product.getGainPer() < porcentajeUtilidad)
+            .forEach(product -> System.out.println("Código: " + product.getID() +
+                                                   " | Descripción: " + product.getDescription() +
+                                                   " | Cantidad en stock: " + product.getStock()));
+    }
+    private boolean isOverstocked(int quantity) {
+        if (list.size() + quantity > maxStock) {
+            System.out.println("No se pueden agregar más productos, el stock llego a su limite.");
+            return false;
+        }
+        return true;
+    }
+
+    private boolean isSufficientBalance(Product product, int quantity) {
+        if (product.getUnitPrice() * quantity > balance) {
+            System.out.println("no hay dinero suficiente para ejecutar la transaccion");
+            return false;
+        }
+        return true;
+    }
+
+    private boolean isStockReached(Product product, int quantity) {
+        if (product.getStock() + quantity >= maxStock) {
+            System.out.println("limite de stock alcanzado por: " + product.getDescription());
+            return false;
+        }
+        return true;
+    }
+
+    public void setMaxStock(int maxStock) {
+        this.maxStock = maxStock;
+    }
+
+    public int getMaxStock() {
+        return maxStock;
+    }
+
+    public float getBalance() {
+        return balance;
+    }
+    public HashMap<String, Product> getList(){
+        return list;
+    }
 }

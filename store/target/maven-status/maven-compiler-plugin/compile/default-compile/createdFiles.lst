@@ -1,1 +1,12 @@
+com\blackdiamond\interfaces\IEatable.class
+com\blackdiamond\models\Drink.class
+com\blackdiamond\interfaces\IDiscount.class
+com\blackdiamond\types\CleaningType.class
+com\blackdiamond\models\CleaningProduct.class
+com\blackdiamond\shoppingcart\ShoppingCart.class
+com\blackdiamond\Store.class
+com\blackdiamond\interfaces\ISalesMagnament.class
+com\blackdiamond\types\PackagingType.class
 com\blackdiamond\App.class
+com\blackdiamond\models\Product.class
+com\blackdiamond\models\Packaged.class

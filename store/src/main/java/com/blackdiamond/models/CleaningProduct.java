@@ -5,62 +5,69 @@ import com.blackdiamond.types.CleaningType;
 
 public class CleaningProduct extends Product implements ISalesMagnament {
     CleaningType tCleaningType;
-    float gainPer;
 
     public CleaningProduct(String id, String des, float unitPrice,
-            CleaningType tCleaningType, float gainPer, float discountPer) {
+            CleaningType tCleaningType) {
         super(des, unitPrice);
         setID(id);
         this.tCleaningType = tCleaningType;
-        setStockPrice(gainPer,discountPer);
     }
 
-    @Override
     public void setID(String id) {
         checkID(id);
-        if (id.charAt(0) != 'A') {
+        if (!id.startsWith("AZ")) {
             System.out.println("producto mal clasificado");
-            return;
+            throw new IllegalArgumentException("identicador de producto invalido");
         }
-        if (id.charAt(1) != 'Z') {
-            System.out.println("producto mal clasificado");
-            return;
-        }
-
         this.ID = id;
     }
 
-    @Override
-    public void setStockPrice(float gainPer, float discountPer) {
+    public void setStockPrice(float gainPer) {
         checkGainPer(gainPer);
-        this.gainPer = gainPer;
-        this.stockPrice = getUnitPrice() * (1 + getGainPer() / 100) - discountPer;
+        this.stockPrice = (getUnitPrice() * (1 + gainPer / 100));
     }
 
-    public void setDiscountPer(float discount){
-        if(discount > 25 && !validDiscount(discount)){
+    public boolean checkDiscountPer(float discount) {
+        if (discount > 25) {
             System.out.println("el descuento no pudo ser aplicado");
+            return false;
+        }
+        if (!validDiscount(discount)) {
+            System.out.println("el descuento no pudo ser aplicado porque es menor al precio de compra");
+            return false;
+        }
+        return true;
+    }
+
+    
+    public void setDiscount(float discount) {
+        if (!checkDiscountPer(discount)) {
             return;
         }
         this.discountPer = discount;
+        this.stockPrice = getDiscountPrice(discount);
     }
 
-    public float getGainPer() {
-        return gainPer;
-    }
 
-    @Override
     public void checkGainPer(float gainPer) {
         boolean isTypeROPAoMULTIUSO = tCleaningType.equals(CleaningType.ROPA)
                 || tCleaningType.equals(CleaningType.MULTIUSO);
-
-        if (isTypeROPAoMULTIUSO && (gainPer < 10 || gainPer > 25)) {
+    
+        if (!isTypeROPAoMULTIUSO && (gainPer < 10 || gainPer > 25)) {
             throw new IllegalArgumentException(
-                    "El porcentaje de ganancia para productos de limpieza no cumple con las restricciones.");
-        } else if (isTypeROPAoMULTIUSO && gainPer > 25) {
+                "El porcentaje de ganancia para productos de limpieza no cumple con las restricciones.");
+        } else if (gainPer > 25) {
             throw new IllegalArgumentException(
-                    "El porcentaje de ganancia para productos de limpieza tipo ROPA o MULTIUSO no puede superar el 25%.");
+                "El porcentaje de ganancia para productos de limpieza no puede superar el 25%.");
         }
+    }
+    @Override
+    public float getDiscount() {
+        return getDiscountPrice(this.discountPer);
+     }
 
+    @Override
+    public float getDiscountPercent() {
+        return this.discountPer;
     }
 }
