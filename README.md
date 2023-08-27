@@ -33,6 +33,8 @@ El proyecto está compuesto por varias clases que representan diferentes tipos d
 
 El proyecto incluye pruebas unitarias para verificar el funcionamiento correcto de las clases y métodos. Las pruebas se encuentran en las clases de prueba correspondientes:
 
+### com.blackdiamond.testproducts
+
 - `ProductTest`: Pruebas relacionadas con la clase base `Product`.
 
 - `PackagedTest`: Pruebas para la clase `Packaged`.
