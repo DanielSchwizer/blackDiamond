@@ -35,13 +35,19 @@ El proyecto incluye pruebas unitarias para verificar el funcionamiento correcto 
 
 ### com.blackdiamond.testproducts
 
-- `ProductTest`: Pruebas relacionadas con la clase base `Product`.
+- `producttest`: Pruebas relacionadas con la clase base `Product`.
 
-- `PackagedTest`: Pruebas para la clase `Packaged`.
+- `packagedtest`: Pruebas para la clase `Packaged`.
 
-- `DrinkTest`: Pruebas para la clase `Drink`.
+- `drinktest`: Pruebas para la clase `Drink`.
 
-- `CleaningProductTest`: Pruebas para la clase `CleaningProduct`.
+- `cleaningProductTest`: Pruebas para la clase `CleaningProduct`.
+
+- `TaxesTest`: pruebas para la aplicacion de impuestos a los productos importados.
+
+- `TestId`: pruebas para la validacion de ID.
+
+## test.com.blackdiamond
 
 - `StoreTest`: Pruebas para la clase `Store`.
 
