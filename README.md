@@ -50,8 +50,9 @@ El proyecto incluye pruebas unitarias para verificar el funcionamiento correcto 
 ### test.com.blackdiamond
 
 - `StoreTest`: Pruebas para la clase `Store`.
+  
 
-Las pruebas validan el comportamiento esperado de los métodos y la interacción entre las clases.
+### Las pruebas validan el comportamiento esperado de los métodos y la interacción entre las clases.
 
 # Requisitos
 
