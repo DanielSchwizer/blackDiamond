@@ -41,7 +41,7 @@ El proyecto incluye pruebas unitarias para verificar el funcionamiento correcto 
 
 - `drinktest`: Pruebas para la clase `Drink`.
 
-- `cleaningproducttest`: Pruebas para la clase `CleaningProduct`.
+- `cleaningtest`: Pruebas para la clase `CleaningProduct`.
 
 - `dicount`: pruebas para los descuentos generales de los productos.
 
