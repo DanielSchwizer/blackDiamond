@@ -3,6 +3,9 @@ package com.blackdiamond.models;
 import com.blackdiamond.interfaces.IEatable;
 import com.blackdiamond.interfaces.ISalesMagnament;
 
+/**
+ * Clase que representa un producto de tipo bebida.
+ */
 public class Drink extends Product implements IEatable, ISalesMagnament {
     private boolean isAlcoholic;
     private boolean isImported;
@@ -10,6 +13,18 @@ public class Drink extends Product implements IEatable, ISalesMagnament {
     private String expiredDate;
     private int kcal;
 
+    /**
+     * Constructor de la clase Drink.
+     *
+     * @param id           Identificador del producto.
+     * @param unitPrice    Precio unitario del producto.
+     * @param des          Descripción del producto.
+     * @param isAlcoholic  Indica si la bebida es alcohólica.
+     * @param isImported   Indica si la bebida es importada.
+     * @param alcoholicPer Porcentaje de alcohol en la bebida.
+     * @param kcal         Valor calórico de la bebida.
+     * @param expiredDate  Fecha de caducidad de la bebida.
+     */
     public Drink(String id, float unitPrice, String des,
             boolean isAlcoholic, boolean isImported, float alcoholicPer, int kcal,
             String expiredDate) {
@@ -22,6 +37,13 @@ public class Drink extends Product implements IEatable, ISalesMagnament {
         setExpiredDate(expiredDate);
     }
 
+    /**
+     * Establece el precio de compra y aplica los impuestos correspondientes.
+     *
+     * @param gainPer Porcentaje de ganancia para el producto.
+     * @throws IllegalArgumentException Si el porcentaje de ganancia es mayor al
+     *                                  20%.
+     */
     public void setStockPrice(float gainPer) {
         if (gainPer > 20) {
             throw new IllegalArgumentException("El porcentaje de ganancia para comestibles no puede superar el 20%.");
@@ -30,6 +52,12 @@ public class Drink extends Product implements IEatable, ISalesMagnament {
         addTaxes();
     }
 
+    /**
+     * Verifica si el descuento puede ser aplicado al producto.
+     *
+     * @param discount Descuento a aplicar en porcentaje.
+     * @return `true` si el descuento es válido, `false` si no es válido.
+     */
     public boolean checkDiscountPer(float discount) {
         if (discount > 15) {
             System.out.println("el descuento no pudo ser aplicado");
@@ -42,6 +70,11 @@ public class Drink extends Product implements IEatable, ISalesMagnament {
         return true;
     }
 
+    /**
+     * Establece el descuento para el producto.
+     *
+     * @param discount Descuento a aplicar en porcentaje.
+     */
     public void setDiscount(float discount) {
         if (!checkDiscountPer(discount)) {
             return;
@@ -50,6 +83,9 @@ public class Drink extends Product implements IEatable, ISalesMagnament {
         this.stockPrice = getDiscountPrice(discount);
     }
 
+    /**
+     * Aplica los impuestos al precio de compra si el producto es importado.
+     */
     public void addTaxes() {
         if (isImported) {
             stockPrice += stockPrice * 0.1;
@@ -58,6 +94,13 @@ public class Drink extends Product implements IEatable, ISalesMagnament {
         }
     }
 
+    /**
+     * Establece el identificador del producto y verifica su formato.
+     *
+     * @param id Identificador del producto.
+     * @throws IllegalArgumentException Si el identificador no cumple con el formato
+     *                                  válido.
+     */
     public void setID(String id) {
         checkID(id);
         if (!id.startsWith("AC")) {

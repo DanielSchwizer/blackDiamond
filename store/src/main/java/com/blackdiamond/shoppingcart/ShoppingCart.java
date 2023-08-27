@@ -4,10 +4,19 @@ import java.util.HashMap;
 
 import com.blackdiamond.models.Product;
 
+/**
+ * Clase que representa un carrito de compras para productos.
+ */
 public class ShoppingCart {
     HashMap<String, Product> shoppingList = new HashMap<String, Product>();
     float gains;
 
+    /**
+     * Agrega un producto al carrito de compras con la cantidad especificada.
+     *
+     * @param product  Producto a agregar al carrito.
+     * @param quantity Cantidad del producto a agregar.
+     */
     public void addProductToCart(Product product, int quantity) {
         if (!isProductAvailable(product, quantity)) {
             return;
@@ -28,6 +37,11 @@ public class ShoppingCart {
         System.out.println(printProduct(product, quantity));
     }
 
+    /**
+     * Maneja el caso de stock insuficiente para un producto.
+     *
+     * @param product Producto con stock insuficiente.
+     */
     private void handleInsufficientStock(Product product) {
         product.setIsForSale(false);
         product.setHasStock(false);
@@ -38,6 +52,14 @@ public class ShoppingCart {
         product.removeProduct(product.getStock());
     }
 
+    /**
+     * Verifica si el producto está disponible y tiene suficiente stock.
+     *
+     * @param product  Producto a verificar.
+     * @param quantity Cantidad del producto requerida.
+     * @return `true` si el producto está disponible y tiene suficiente stock,
+     *         `false` en caso contrario.
+     */
     private boolean isProductAvailable(Product product, int quantity) {
         if (!product.getIsForsale()) {
             System.out.println("el producto no esta disponible para la venta");
@@ -59,6 +81,11 @@ public class ShoppingCart {
         return true;
     }
 
+    /**
+     * Verifica si el carrito de compras está lleno.
+     *
+     * @return `true` si el carrito no está lleno, `false` si está lleno.
+     */
     private boolean hasSufficientStock(Product product, int quantity) {
         if (product.getStock() >= quantity) {
             return true;
@@ -74,6 +101,10 @@ public class ShoppingCart {
                 product.getStockPrice());
     }
 
+    /**
+     * getters
+     * 
+     */
     public HashMap<String, Product> getShoppingList() {
         return shoppingList;
     }

@@ -11,19 +11,29 @@ import com.blackdiamond.types.CleaningType;
 import com.blackdiamond.types.PackagingType;
 
 public class TestId {
-     
+    /**
+     * Verifica que se lance una excepción IllegalArgumentException al intentar
+     * crear un producto envasado con un identificador inválido.
+     */
     @Test
     public void testInvalidPackageID() {
         try {
-            Packaged invalidPackaged = new Packaged("AB3456", "Producto Inválido", 10, PackagingType.LATA, true, 500, "2024-04-08");
-            Packaged invalidPackaged2 = new Packaged("12345", "Producto Inválido", 10, PackagingType.LATA, true, 500, "2024-04-08");
-            Packaged invalidPackaged3 = new Packaged("AB35", "Producto Inválido", 10, PackagingType.LATA, true, 500, "2024-04-08");
+            Packaged invalidPackaged = new Packaged("AB3456", "Producto Inválido", 10, PackagingType.LATA, true, 500,
+                    "2024-04-08");
+            Packaged invalidPackaged2 = new Packaged("12345", "Producto Inválido", 10, PackagingType.LATA, true, 500,
+                    "2024-04-08");
+            Packaged invalidPackaged3 = new Packaged("AB35", "Producto Inválido", 10, PackagingType.LATA, true, 500,
+                    "2024-04-08");
             fail("Se esperaba IllegalArgumentException pero no se lanzó ninguna excepción");
         } catch (IllegalArgumentException e) {
             // Se espera que se lance una IllegalArgumentException
         }
     }
 
+    /**
+     * Verifica que se lance una excepción IllegalArgumentException al intentar
+     * crear una bebida con un identificador inválido.
+     */
     @Test
     public void testInvalidDrinkID() {
         try {
@@ -36,12 +46,19 @@ public class TestId {
         }
     }
 
+    /**
+     * Verifica que se lance una excepción IllegalArgumentException al intentar
+     * crear un producto de limpieza con un identificador inválido.
+     */
     @Test
     public void testInvalidCleaningID() {
         try {
-            CleaningProduct invalidCleaningProduct = new CleaningProduct("az345", "Producto Limpieza Inválido", 20, CleaningType.MULTIUSO);
-            CleaningProduct invalidCleaningProduct2 = new CleaningProduct("12345", "Producto Limpieza Inválido", 20, CleaningType.MULTIUSO);
-            CleaningProduct invalidCleaningProduct3 = new CleaningProduct("AZ3455", "Producto Limpieza Inválido", 20, CleaningType.MULTIUSO);
+            CleaningProduct invalidCleaningProduct = new CleaningProduct("az345", "Producto Limpieza Inválido", 20,
+                    CleaningType.MULTIUSO);
+            CleaningProduct invalidCleaningProduct2 = new CleaningProduct("12345", "Producto Limpieza Inválido", 20,
+                    CleaningType.MULTIUSO);
+            CleaningProduct invalidCleaningProduct3 = new CleaningProduct("AZ3455", "Producto Limpieza Inválido", 20,
+                    CleaningType.MULTIUSO);
             fail("Se esperaba IllegalArgumentException pero no se lanzó ninguna excepción");
         } catch (IllegalArgumentException e) {
             // Se espera que se lance una IllegalArgumentException
@@ -49,5 +66,3 @@ public class TestId {
     }
 
 }
-
-
