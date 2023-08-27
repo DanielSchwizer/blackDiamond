@@ -1,6 +1,6 @@
 # Tienda Black Diamond
 
-Este proyecto es una simulación de una tienda llamada "Black Diamond Store" que gestiona productos en un inventario y permite la compra y venta de estos productos. El proyecto está desarrollado en Java y sigue los principios de la programación orientada a objetos, incluyendo interfaces, herencia y encapsulamiento.
+Este proyecto es una simulación de una tienda llamada "Black Diamond Store" que gestiona productos en un inventario y permite la compra y venta de estos productos.
 
 ## Estructura del Proyecto
 
@@ -53,7 +53,7 @@ El proyecto incluye pruebas unitarias para verificar el funcionamiento correcto 
 
 Las pruebas validan el comportamiento esperado de los métodos y la interacción entre las clases.
 
-#Requisitos
+# Requisitos
 
 - Java 8 o superior instalado en tu sistema.
  
