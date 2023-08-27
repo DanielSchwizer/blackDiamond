@@ -6,7 +6,7 @@ Este proyecto es una simulación de una tienda llamada "Black Diamond Store" que
 
 El proyecto está compuesto por varias clases que representan diferentes tipos de productos y funcionalidades de la tienda. A continuación, se detalla la estructura principal:
   
-###com.blackdiamond.models
+### com.blackdiamond.models
   
 - `Product`: Clase base abstracta que representa un producto genérico con atributos comunes como ID, descripción y precio.
 
@@ -16,16 +16,16 @@ El proyecto está compuesto por varias clases que representan diferentes tipos d
 
 - `CleaningProduct`: Clase que hereda de `Product` y representa productos de limpieza con detalles como tipo de limpieza.
 
-###com.blackdiamond.shoppingcart  
+### com.blackdiamond.shoppingcart  
 
 - `ShoppingCart`: Clase que modela el carrito de compras para agregar productos antes de la venta.
 
-###com.blackdiamond 
+### com.blackdiamond 
 
 - `Store`: Clase principal que gestiona la tienda y sus operaciones, como comprar productos, vender y mantener el inventario.
 - `App` : Clase donde se ejecuta la aplicacion
 
-###com.blackdiamond.interfaces  
+### com.blackdiamond.interfaces  
 
 - Interfaces `IDiscount`, `IEatable`, `ISalesMagnament`: Definen métodos relacionados con descuentos, propiedades comestibles y manejo de ventas.
 
