@@ -47,7 +47,7 @@ El proyecto incluye pruebas unitarias para verificar el funcionamiento correcto 
 
 - `TestId`: pruebas para la validacion de ID.
 
-## test.com.blackdiamond
+### test.com.blackdiamond
 
 - `StoreTest`: Pruebas para la clase `Store`.
 
