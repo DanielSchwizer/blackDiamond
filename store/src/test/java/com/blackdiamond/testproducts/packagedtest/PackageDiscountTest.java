@@ -1,4 +1,4 @@
-package com.blackdiamond.testproducts.packagedgains;
+package com.blackdiamond.testproducts.packagedtest;
 
 import static org.junit.Assert.assertEquals;
 
@@ -9,7 +9,8 @@ import com.blackdiamond.types.PackagingType;
 
 public class PackageDiscountTest {
     /**
-     * Prueba establecer un porcentaje de descuento que supere el límite máximo en un producto envasado.
+     * Prueba establecer un porcentaje de descuento que supere el límite máximo en
+     * un producto envasado.
      * Se espera que el porcentaje de descuento sea 0.
      */
     @Test

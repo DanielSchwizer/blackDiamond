@@ -8,6 +8,11 @@ import com.blackdiamond.models.Packaged;
 import com.blackdiamond.types.PackagingType;
 
 public class TaxesTest {
+
+    /**
+     * Prueba aplicar el impuesto del 10% a un producto envasado importado.
+     * Se espera que el precio de venta se actualice correctamente con el impuesto.
+     */
     @Test
     public void testImportedProductTax() {
         // Crear un producto envasado importado con un precio de venta de 50

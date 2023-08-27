@@ -1,4 +1,4 @@
-package com.blackdiamond.testproducts.packagedgains;
+package com.blackdiamond.testproducts.packagedtest;
 
 import org.junit.Test;
 
