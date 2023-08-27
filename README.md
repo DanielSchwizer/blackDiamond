@@ -53,4 +53,13 @@ El proyecto incluye pruebas unitarias para verificar el funcionamiento correcto 
 
 Las pruebas validan el comportamiento esperado de los métodos y la interacción entre las clases.
 
+#Requisitos
+
+- Java 8 o superior instalado en tu sistema.
+ 
+- Un entorno de desarrollo compatible (Eclipse, VS code, etc.) para importar y ejecutar el proyecto.
+  
+- tener instalado maven.
+
+
 
