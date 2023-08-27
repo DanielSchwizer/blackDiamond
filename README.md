@@ -1,11 +1,6 @@
 
-<html>
 
-<head>
-    <title>Black Diamond Store - README</title>
-</head>
 
-<body>
     <h1>Black Diamond Store - README</h1>
     <h3>Tienda de Productos</h3>
 
@@ -49,7 +44,3 @@
     <p>El proyecto incluye pruebas unitarias para verificar la funcionalidad de las clases y métodos. Las
         pruebas están implementadas utilizando JUnit y pueden encontrarse en el paquete .store.src.test.java.com.blackdiamond <code>test</code> del proyecto. Las pruebas abarcan diferentes escenarios, como la compra y venta de productos, aplicar descuentos y calcular ganancias.</p>
     <p>Para ejecutar las pruebas, simplemente navega a la carpeta <code>test</code> en tu entorno de desarrollo y ejecuta las clases de prueba individualmente o en conjunto.</p>
-
-</body>
-
-</html>
