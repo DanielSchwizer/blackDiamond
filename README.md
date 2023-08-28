@@ -56,6 +56,9 @@ El proyecto incluye pruebas unitarias para verificar el funcionamiento correcto 
 
 ### Las pruebas validan el comportamiento esperado de los métodos y la interacción entre las clases.
 
+# Reporte de las pruebas unitarias
+## el reporte de las pruebas unitarias se puede encontrar en store\target\site\surefire-report.html
+
 # Requisitos
 
 - Java 8 o superior instalado en tu sistema.
