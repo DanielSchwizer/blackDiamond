@@ -59,7 +59,7 @@ public class Packaged extends Product implements IEatable, ISalesMagnament {
      */
     public void setExpiredDate(String date) {
         try {
-            this.expiredDate = new SimpleDateFormat("dd/MM/yyyy").parse(date).toString();
+            this.expiredDate = new SimpleDateFormat("dd-MM-yyyy").parse(date).toString();
         } catch (Exception e) {
             System.err.println(e.getStackTrace());
         }

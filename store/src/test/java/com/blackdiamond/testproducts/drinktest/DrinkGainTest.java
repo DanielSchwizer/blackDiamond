@@ -5,8 +5,6 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
 import com.blackdiamond.models.Drink;
-import com.blackdiamond.models.Packaged;
-import com.blackdiamond.types.PackagingType;
 
 /**
  * Prueba establecer un precio de stock con un porcentaje de ganancia que excede

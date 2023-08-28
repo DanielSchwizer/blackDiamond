@@ -5,7 +5,6 @@ import java.util.List;
 import com.blackdiamond.models.CleaningProduct;
 import com.blackdiamond.models.Drink;
 import com.blackdiamond.models.Packaged;
-import com.blackdiamond.shoppingcart.ShoppingCart;
 import com.blackdiamond.types.CleaningType;
 import com.blackdiamond.types.PackagingType;
 
@@ -39,7 +38,6 @@ public class App {
 
     productoLimpieza.setStockPrice(20);
     productoLimpieza.setDiscount(10);
-    System.out.println(productoBebida.getDiscountPercent());
     // Agregar productos al carrito de compras
 
     store.addToCart(productoEnvasado, 2);
