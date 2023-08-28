@@ -20,7 +20,7 @@ public abstract class Product implements IDiscount {
      * Constructor de la clase Product.
      *
      * @param des       Descripción del producto.
-     * @param unitPrice Precio unitario del producto.
+     * @param unitPrice Precio unitario(compra) del producto.
      */
 
     public Product(String des, float unitPrice) {
@@ -89,18 +89,6 @@ public abstract class Product implements IDiscount {
         float finalprice = stockPrice * (discount / 100);
         finalprice = stockPrice - finalprice;
         return finalprice;
-    }
-    
-    /**
-     * Aplica impuestos si el producto es importado.
-     */
-    public void addTaxes() {
-        if (this.getisImported()) {
-            float taxes = stockPrice * (1 + 10 / 100);
-            float taxesPrice = stockPrice + taxes;
-            this.stockPrice = taxesPrice;
-
-        }
     }
 
     @Override

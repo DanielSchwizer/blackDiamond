@@ -17,7 +17,7 @@ public class Drink extends Product implements IEatable, ISalesMagnament {
      * Constructor de la clase Drink.
      *
      * @param id           Identificador del producto.
-     * @param unitPrice    Precio unitario del producto.
+     * @param unitPrice    Precio unitario(compra) del producto.
      * @param des          Descripción del producto.
      * @param isAlcoholic  Indica si la bebida es alcohólica.
      * @param isImported   Indica si la bebida es importada.

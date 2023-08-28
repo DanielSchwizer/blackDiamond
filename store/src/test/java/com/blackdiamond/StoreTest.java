@@ -143,13 +143,13 @@ public class StoreTest {
      */
     @Test
     public void testExceedMaxUnitsPerProduct() {
-        store.buyProducts(productoEnvasado, 7);
+        store.buyProducts(productoEnvasado, 12);
 
         store.addToCart(productoEnvasado, 11); // Intentar vender más de 10 unidades
         store.sellProducts();
 
         int remainingUnits = productoEnvasado.getStock();
-        assertEquals(7, remainingUnits); // Se espera que el stock no se haya actualizado
+        assertEquals(12, remainingUnits); // Se espera que el stock no se haya actualizado
     }
 
     /**

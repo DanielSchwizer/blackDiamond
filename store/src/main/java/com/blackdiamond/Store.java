@@ -61,8 +61,8 @@ public class Store {
     public void sellProducts() {
         for (Map.Entry<String, Product> p : shoppingCart.getShoppingList().entrySet()) {
             list.replace(p.getKey(), p.getValue());
-            balance += shoppingCart.getGains();
         }
+        balance = balance + shoppingCart.getGains();
 
         System.out.println("TOTAL VENTA = " + shoppingCart.getGains());
 
@@ -93,11 +93,10 @@ public class Store {
     public List<String> obtainEatablesWithLessDiscount(float discountPer) {
         return list.values().stream()
                 .filter(product -> product instanceof Packaged && !product.getisImported())
-                .map(product -> (Packaged) product)
                 .filter(Packaged -> Packaged.getDiscountPercent() < discountPer)
-                .sorted((comestible1, comestible2) -> Float.compare(comestible1.getStockPrice(),
-                        comestible2.getStockPrice()))
-                .map(comestible -> comestible.getDescription().toUpperCase())
+                .sorted((packaged1, packaged2) -> Float.compare(packaged1.getStockPrice(),
+                        packaged2.getStockPrice()))
+                .map(packaged -> packaged.getDescription().toUpperCase())
                 .collect(Collectors.toList());
     }
 

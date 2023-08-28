@@ -22,5 +22,24 @@ public class PackageDiscountTest {
 
         assertEquals(0, productoEnvasado.getDiscountPercent(), 0.01);
     }
+    /**
+     * Prueba establecer un porcentaje de descuento que sea valido para un producto envasado
+     */
+    @Test
+    public void testDiscountPackaged() {
+        Packaged productoEnvasado = new Packaged("AB456", "Producto Envasado", 20, PackagingType.LATA, false, 500,
+                "2024-04-08");
+        float gainPer = 20;
+        float discount = 15;
+        productoEnvasado.setStockPrice(gainPer);
+        productoEnvasado.setDiscount(discount);
+        //el precio que se espera tenga el producto envasado
+        float stockPriceWgains = productoEnvasado.getUnitPrice() * (1 + gainPer / 100);
+        float expectedDiscount = stockPriceWgains *(discount/100);
+        float expectedPrice = stockPriceWgains - expectedDiscount;
+
+        //se verifica que el producto tenga ese precio despues del descuento
+        assertEquals(expectedPrice, productoEnvasado.getStockPrice(), 0.01);
+    }
 
 }

@@ -14,7 +14,7 @@ public class CleaningProduct extends Product implements ISalesMagnament {
      *
      * @param id            Identificador del producto.
      * @param des           Descripción del producto.
-     * @param unitPrice     Precio unitario del producto.
+     * @param unitPrice     Precio unitario(compra) del producto.
      * @param tCleaningType Tipo de producto de limpieza.
      */
     public CleaningProduct(String id, String des, float unitPrice,

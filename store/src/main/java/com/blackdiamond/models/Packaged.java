@@ -20,7 +20,7 @@ public class Packaged extends Product implements IEatable, ISalesMagnament {
      *
      * @param id          Identificador del producto.
      * @param des         Descripción del producto.
-     * @param unitPrice   Precio unitario del producto.
+     * @param unitPrice   Precio unitario(compra) del producto.
      * @param pType       Tipo de empaque del producto.
      * @param isImported  Indica si el producto es importado.
      * @param kcal        Valor calórico del producto.
